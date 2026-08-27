@@ -1,4 +1,5 @@
 const escapeHTML = (unsafeString) => {
+  if (typeof unsafeString !== 'string') return '';
   return unsafeString
     .replaceAll(/&/g, '&amp;')
     .replaceAll(/</g, '&lt;')
@@ -13,7 +14,7 @@ const escapeRegExp = (unsafeString) => {
 
 export const highlightCaseInsensitive = (text, query) => {
   const safeText = escapeHTML(text)
-  const queryFormatted = query.trim()
+  const queryFormatted = typeof query === 'string' ? query.trim() : '';
 
   if (queryFormatted.length === 0) {
     return safeText
